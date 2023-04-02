@@ -5,6 +5,10 @@ if exists('g:loaded_MvVis') | finish | endif
 let s:cpo_save = &cpo | set cpo&vim
 
 function! s:MvVis(d) abort range
+   try | undojoin | call s:MvVis2(a:d) | catch /./ | call s:MvVis2(a:d) | endtry
+endfunction
+
+function! s:MvVis2(d) abort range
   let c = v:count1
   norm! gv
 
